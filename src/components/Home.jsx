@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Product from "./Product";
+import { db } from "../database/firebase";
+import { DockTwoTone } from '@material-ui/icons';
 
 const Home = () => {
+
+  const [ products, setProducts ] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+  }, [])
+
+  const getProducts = () => {
+    db.collection('products').onSnapshot((snapshot) => {
+      let tempProduct = [];
+
+      tempProduct = snapshot.docs.map((doc) => (
+        {
+          id: doc.id,
+          product: doc.data()
+        }
+        ));
+      setProducts(tempProduct);
+    })
+  }
+
+  console.log(products);
   return ( 
     <Container>
       <Banner>
