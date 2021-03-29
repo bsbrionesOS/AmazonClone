@@ -10,7 +10,7 @@ const Home = () => {
       </Banner>
       <Content>
         <Product />
-        Hello
+        <Product />
       </Content>
     </Container>
    );
@@ -28,11 +28,13 @@ const Banner = styled.div`
   min-height: 600px;
   background-position: center;
   background-size: cover;
+  z-index: 1;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 `
 const Content = styled.div`
-  background: white;
   padding-left: 10px;
   padding-left: 10px;
-  margin-top: -350px
+  margin-top: -350px;
+  z-index: 100px;
+  display: flex;
 `
