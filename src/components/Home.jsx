@@ -26,15 +26,23 @@ const Home = () => {
     })
   }
 
-  console.log(products);
   return ( 
     <Container>
       <Banner>
 
       </Banner>
       <Content>
-        <Product />
-        <Product />
+        {
+          products.map((data) => (
+            <Product 
+              key={data.id}
+              title={data.product.name}
+              price={data.product.price}
+              rating={data.product.rating}
+              image={data.product.image}
+            />
+          ))
+        }
       </Content>
     </Container>
    );

@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const Product = () => {
+const Product = (props) => {
+  console.log(props, "im props")
   return (
     <Container>
       <Title>Ipad Pro</Title>
