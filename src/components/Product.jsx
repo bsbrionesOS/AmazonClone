@@ -1,14 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const Product = (props) => {
-  console.log(props, "im props")
+const Product = ({title, price, rating, image}) => {
   return (
     <Container>
-      <Title>Ipad Pro</Title>
-      <Price>$1449</Price>
-      <Rating>⭐⭐⭐⭐⭐</Rating>
-      <Image src="https://m.media-amazon.com/images/I/81SGb5l+lZL._AC_UY218_.jpg" />
+      <Title>{title}</Title>
+      <Price>${price}</Price>
+      <Rating>
+        {
+          Array(rating)
+          .fill()
+          .map(rating => <p>⭐</p>)
+        }
+      </Rating>
+      <Image src={image} />
       <ActionSection>
         <AddToCartButton>Add to Cart</AddToCartButton>
       </ActionSection>
@@ -34,7 +39,9 @@ const Price = styled.span`
   font-weight: 500;
   margin-top: 3px;
 `;
-const Rating = styled.div``;
+const Rating = styled.div`
+  display: flex;
+`;
 const Image = styled.img`
   max-height: 200px;
   object-fit: contain;

@@ -39,7 +39,7 @@ const Home = () => {
               title={data.product.name}
               price={data.product.price}
               rating={data.product.rating}
-              image={data.product.image}
+              image={data.product.imageUrl}
             />
           ))
         }
