@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { db } from "../database/firebase";
 
 const Product = ({title, price, rating, image, id}) => {
-
+  console.log(id, "hello")
   const addToCart = () => {
     const cartItem = db.collection("cartItems").doc(id);
     cartItem.get()

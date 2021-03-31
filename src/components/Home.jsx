@@ -40,6 +40,7 @@ const Home = () => {
               price={data.product.price}
               rating={data.product.rating}
               image={data.product.imageUrl}
+              id={data.id}
             />
           ))
         }

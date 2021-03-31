@@ -3,6 +3,12 @@ import styled from "styled-components";
 
 
 const CartItem = ({id, item}) => {
+  let options = [];
+
+  for(let i = 1; i < Math.max(item.quantity + 1, 21); i++){
+    options.push(<option value={i}> Qty: {i}</option>)
+  }
+
   return ( 
     <Container>
       <ImageContainer>
@@ -15,7 +21,13 @@ const CartItem = ({id, item}) => {
         </CartItemInfoTop>
 
         <CartItemInfoBottom>
-          <CartItemQuantity>{item.quantity}</CartItemQuantity>
+          <CartItemQuantity>
+            <select
+              value={item.quantity}
+            >
+              {options}
+            </select>
+            </CartItemQuantity>
 
           <CartItemDelete>delete</CartItemDelete>
         </CartItemInfoBottom>
@@ -32,6 +44,7 @@ const Container = styled.div`
   padding-top: 12px;
   padding-bottom: 12px;
   display: flex;
+  border-bottom: 1px solid #DDD;
 `
 const ImageContainer = styled.div`
   width: 180px;
@@ -46,7 +59,9 @@ const ImageContainer = styled.div`
   }
 `
 
-const CartItemInfo = styled.div``
+const CartItemInfo = styled.div`
+  flex-grow: 1;
+`
 
 const CartItemInfoTop = styled.div`
   color: #007185;
@@ -58,9 +73,20 @@ const CartItemInfoTop = styled.div`
 const CartItemInfoBottom = styled.div`
   display:flex;
   margin-top:4px;
+  align-item: center;
 `
 
-const CartItemQuantity = styled.div``
+const CartItemQuantity = styled.div`
+  select {
+    border-radius: 7px;
+    background-color: #F0F2F2;
+    padding: 8px;
+    box-shadow: 0 2px 5px rgba(15, 17, 17, .15);
+    :focus {
+      outline: none;
+    }
+  }
+`
 
 const CartItemDelete = styled.div`
   color: #007185;
