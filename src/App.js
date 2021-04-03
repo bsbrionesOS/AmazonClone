@@ -6,8 +6,10 @@ import Cart from "./components/Cart";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
+import Login from './components/login';
 
 function App() {
+  const [ user, setUser] = useState(null);
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -26,11 +28,16 @@ function App() {
        setCartItems(tempItems);
     })
   }
+  console.log("User",user);
   return (
     
     <Router>
+      {
+        !user ? (
+          <Login setUser={setUser}/>
+        ) : (
       <Container>
-        <Header cartItems={cartItems}/>
+        <Header cartItems={cartItems} user={user}/>
         <Switch>
           <Route path="/cart">
             <Cart cartItems={cartItems} />
@@ -41,6 +48,8 @@ function App() {
           </Route>
         </Switch>
     </Container>
+        )
+      }
     </Router>
   );
 }
