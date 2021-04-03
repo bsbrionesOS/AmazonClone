@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./components/Header";
 import {useState, useEffect} from "react";
-import { db } from './database/firebase';
+import { auth, db } from './database/firebase';
 import Cart from "./components/Cart";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import styled from "styled-components";
 import Login from './components/login';
 
 function App() {
-  const [ user, setUser] = useState(null);
+  const [ user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,14 @@ function App() {
        setCartItems(tempItems);
     })
   }
+
+  const signOut = () => {
+    auth.signOut().then(() => {
+      setUser(null);
+      localStorage.removeItem('user');
+    })
+
+  }
   console.log("User",user);
   return (
     
@@ -37,7 +45,7 @@ function App() {
           <Login setUser={setUser}/>
         ) : (
       <Container>
-        <Header cartItems={cartItems} user={user}/>
+        <Header cartItems={cartItems} user={user} signOut={signOut}/>
         <Switch>
           <Route path="/cart">
             <Cart cartItems={cartItems} />
